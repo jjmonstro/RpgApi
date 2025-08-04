@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RpgApi.Data;
 using RpgApi.Models;
+using Microsoft.Extensions.Configuration;
+{
+    
+}
 
 namespace RpgApi.Controllers
 {
@@ -14,11 +18,12 @@ namespace RpgApi.Controllers
     public class PersonagensController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IConfiguration _configuration;
 
-
-        public PersonagensController(DataContext context)
+        public PersonagensController(DataContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         [HttpGet("{id}")] //Buscar pelo id
