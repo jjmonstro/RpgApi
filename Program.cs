@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using RpgApi.Data;
 
@@ -13,10 +14,21 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
-builder.Services.AddControllers().AddNewtonsoftJson(options => 
-options.SerializerSettings.ReferenceLoopHandling = 
-Newtonsoft.Json.ReferenceLoopHandling.Ignore 
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8
+            .GetBytes(builder.Configuration.GetSection("ConfiguracaoToken:Chave").Value)),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
 
 var app = builder.Build();
 
@@ -47,6 +59,9 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 app.Run();
 
@@ -56,3 +71,28 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 }
 
 
+//INSTRUÇÕES GIT
+/*--Configuração Inicial
+git config --global init.defaultBranch main  
+git config --global user.name "SEU NOME"  
+git config --global user.email "seuemail@seuemail" 
+
+echo "#API de jogo RPG - Turma 3AI" >> README.md  
+dotnet new gitignore
+
+--Subindo para o repositório
+git init  
+git add . 
+git commit -m "Exemplo: Aula 01 - Criação do Projeto RPG API - Métodos GET"
+git branch -M main  
+git remote add origin https://github.com/COMPLEMENTO 
+-----EM CASOS DE ERRO-----
+git remote remove origin
+-----FIM DO TRECHO EM CASO DE ERROS-----
+git push -u origin main
+
+--Atualizar projeto no respotitório
+git status 
+git add . 
+git commit -m “Aula 01 - Atualização das instruções de Git” 
+git push [-u origin main] */
