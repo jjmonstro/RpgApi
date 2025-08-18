@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RpgApi.Data;
 using Microsoft.EntityFrameworkCore;
@@ -246,6 +250,8 @@ namespace RpgApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        
+        
 
 
         private string CriarToken(Usuario usuario)
