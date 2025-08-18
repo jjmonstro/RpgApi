@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace RpgAPI.Migrations
+namespace RpgApi.Migrations
 {
     /// <inheritdoc />
     public partial class MigracaoUsuario : Migration
@@ -29,15 +29,15 @@ namespace RpgAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "Varchar(200)", maxLength: 200, nullable: false),
                     PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Foto = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Latitude = table.Column<double>(type: "float", nullable: true),
                     Longitude = table.Column<double>(type: "float", nullable: true),
                     DataAcesso = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Perfil = table.Column<string>(type: "nvarchar(max)", nullable: true, defaultValue: "Jogador"),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Perfil = table.Column<string>(type: "Varchar(200)", maxLength: 200, nullable: true, defaultValue: "Jogador"),
+                    Email = table.Column<string>(type: "Varchar(200)", maxLength: 200, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,7 +96,7 @@ namespace RpgAPI.Migrations
             migrationBuilder.InsertData(
                 table: "TB_USUARIOS",
                 columns: new[] { "Id", "DataAcesso", "Email", "Foto", "Latitude", "Longitude", "PasswordHash", "PasswordSalt", "Perfil", "Username" },
-                values: new object[] { 1, null, "seuEmail@gmail.com", null, -23.520024100000001, -46.596497999999997, new byte[] { 57, 105, 29, 203, 12, 109, 114, 88, 128, 40, 126, 29, 90, 165, 82, 115, 79, 96, 90, 173, 252, 53, 60, 221, 226, 241, 213, 54, 251, 238, 126, 216, 0, 225, 171, 56, 48, 180, 181, 204, 72, 99, 118, 201, 150, 222, 102, 246, 195, 8, 147, 163, 203, 161, 171, 71, 11, 147, 193, 193, 82, 5, 130, 7 }, new byte[] { 101, 55, 121, 27, 116, 38, 26, 152, 245, 212, 214, 159, 177, 182, 212, 32, 180, 116, 62, 48, 148, 246, 64, 204, 80, 159, 163, 92, 205, 208, 178, 224, 6, 102, 113, 6, 144, 38, 22, 143, 213, 192, 22, 176, 251, 250, 20, 208, 182, 63, 91, 70, 148, 193, 41, 47, 11, 156, 148, 254, 112, 201, 90, 148, 235, 32, 82, 179, 185, 135, 96, 149, 122, 180, 55, 38, 224, 119, 71, 77, 119, 96, 102, 141, 110, 140, 29, 166, 29, 143, 88, 0, 50, 200, 26, 192, 111, 87, 108, 245, 219, 195, 208, 47, 17, 230, 1, 196, 142, 144, 38, 217, 37, 82, 181, 124, 42, 9, 24, 9, 153, 155, 17, 12, 72, 124, 196, 111 }, "Admin", "UsuarioAdmin" });
+                values: new object[] { 1, null, "seuEmail@gmail.com", null, -23.520024100000001, -46.596497999999997, new byte[] { 125, 129, 148, 111, 161, 43, 137, 206, 242, 221, 170, 196, 229, 29, 64, 218, 125, 106, 101, 20, 124, 242, 78, 48, 38, 31, 255, 205, 247, 214, 209, 190, 37, 60, 140, 119, 165, 165, 134, 220, 59, 52, 200, 10, 184, 229, 252, 170, 11, 41, 104, 65, 134, 85, 249, 67, 27, 185, 95, 72, 240, 87, 192, 84 }, new byte[] { 109, 71, 225, 92, 113, 193, 224, 112, 26, 184, 211, 13, 92, 88, 135, 44, 122, 241, 187, 189, 171, 120, 91, 7, 90, 139, 242, 122, 88, 73, 159, 160, 130, 72, 196, 179, 240, 196, 105, 203, 202, 228, 149, 101, 85, 158, 114, 69, 254, 23, 201, 228, 192, 221, 224, 148, 198, 195, 191, 180, 151, 115, 249, 48, 176, 195, 85, 215, 103, 40, 162, 195, 0, 96, 86, 168, 208, 108, 80, 159, 42, 107, 12, 57, 138, 87, 16, 119, 151, 4, 196, 49, 55, 218, 176, 36, 81, 85, 141, 248, 196, 252, 114, 95, 211, 44, 71, 174, 64, 49, 82, 222, 192, 86, 218, 85, 45, 107, 229, 175, 171, 151, 119, 78, 41, 79, 27, 106 }, "Admin", "UsuarioAdmin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_PERSONAGENS_UsuarioId",
